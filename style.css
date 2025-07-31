@@ -1,0 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Gochi+Hand&family=Quicksand:wght@400;700&display=swap');
+
+body, html {
+    margin: 0; padding: 0;
+    width: 100%; height: 100%;
+    overflow: hidden;
+    background: #ffeaf2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Quicksand', sans-serif;
+}
+
+#sparkle-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+.sparkle { position: absolute; bottom: -50px; background: white; border-radius: 50%; animation: driftUp linear forwards; }
+@keyframes driftUp { to { transform: translateY(-120vh); opacity: 0; } }
+
+#start-overlay { position: fixed; z-index: 300; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); display: flex; justify-content: center; align-items: center; text-align: center; color: white; transition: opacity 1s; }
+.start-content h1 { font-family: 'Gochi Hand', cursive; font-size: 3em; }
+#start-button { background: #ff85b3; border: 1px solid white; color: white; padding: 10px 25px; border-radius: 20px; font-size: 1.1em; cursor: pointer; }
+
+/* PERBAIKAN: Transisi dibuat lebih halus dan durasinya disesuaikan */
+.music-box-container {
+    position: fixed;
+    z-index: 10;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    perspective: 1200px;
+    opacity: 0;
+    transition: transform 2s cubic-bezier(0.25, 1, 0.5, 1), opacity 1.5s ease-in-out;
+}
+.music-box-container.visible {
+    opacity: 1;
+}
+.music-box-container.shrunk {
+    transform: translate(30vw, 35vh) scale(0.35); /* Posisi akhir di kanan bawah */
+}
+
+.music-box { width: 280px; height: 180px; position: relative; transform-style: preserve-3d; transform: rotateX(-20deg) rotateY(-30deg); }
+.box-base { position: absolute; bottom: 0; width: 100%; height: 100%; background: #ffc2d9; border: 2px solid #ff85b3; box-shadow: 0 10px 30px rgba(0,0,0,0.3); display: flex; justify-content: center; align-items: center; }
+.box-lid { position: absolute; bottom: 100%; width: 100%; height: 30px; background: #ff9ebb; border: 2px solid #ff85b3; transform-origin: bottom; transition: transform 2s ease-in-out; }
+.box-lid.open { transform: rotateX(-120deg); }
+
+.character { width: 90px; height: 90px; transform-style: preserve-3d; animation: spin 8s linear infinite; animation-play-state: paused; }
+.character img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; }
+.character.playing { animation-play-state: running; }
+@keyframes spin { from { transform: rotateY(0deg); } to { transform: rotateY(360deg); } }
+
+.message-display {
+    position: fixed;
+    z-index: 100;
+    background: #fff;
+    padding: 15px 15px 80px 15px;
+    border-radius: 5px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    width: 80vw;
+    max-width: 300px;
+    text-align: center;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(100vh);
+    transition: opacity 0.5s, transform 0.5s;
+}
+.message-display.visible {
+    opacity: 1;
+    pointer-events: all;
+    animation: polaroidFlyIn 1s forwards cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+@keyframes polaroidFlyIn {
+     0% { transform: translateY(100vh) rotate(15deg); }
+     60% { transform: translateY(-10vh) rotate(-5deg); }
+     100% { transform: translateY(0) rotate(2deg); }
+}
+
+.message-display img { width: 100%; height: auto; display: block; }
+.message-display .caption { position: absolute; bottom: 10px; left: 15px; right: 15px; text-align: center; }
+.message-display h2 { font-family: 'Gochi Hand', cursive; font-size: 1.5em; margin: 0; }
+.message-display p { font-size: 0.9em; margin: 5px 0 10px 0; }
+
+.nav-buttons { opacity: 0; animation: buttonFadeIn 0.5s forwards 1s; }
+.nav-buttons button { background: #ff85b3; border: none; color: white; padding: 8px 15px; border-radius: 20px; }
+@keyframes buttonFadeIn { to { opacity: 1; } }
+
+#dedication-screen {
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: 85%;
+    max-width: 400px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    text-align: center;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+    pointer-events: none;
+    z-index: 100;
+}
+#dedication-screen.visible { opacity: 1; pointer-events: all; }
+#dedication-screen h2 { font-family: 'Gochi Hand', cursive; margin: 0 0 10px 0; }
+
+/* Gaya untuk Layar Login Baru */
+#login-screen {
+    position: fixed;
+    z-index: 400;
+    /* Paling depan */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+    transition: opacity 1s;
+}
+
+.login-box {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 30px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    width: 85%;
+    max-width: 320px;
+}
+
+.login-box h1 {
+    font-family: 'Gochi Hand', cursive;
+    font-size: 2.5em;
+    margin-top: 0;
+}
+
+.login-box input {
+    width: 90%;
+    padding: 12px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1em;
+}
+
+#login-button {
+    background: #ff85b3;
+    border: none;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 20px;
+    font-size: 1.1em;
+    cursor: pointer;
+    width: 100%;
+}
+
+#error-message {
+    color: #ffb8b8;
+    height: 20px;
+    margin-top: 10px;
+}

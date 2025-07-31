@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Sebuah Hadiah Untukmu</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="sparkle-canvas"></div>
+
+    <div id="login-screen">
+        <div class="login-box">
+            <h1>Hadiah Spesial</h1>
+            <p>Silakan masukkan nama dan password rahasia.</p>
+            <input type="text" id="name-input" placeholder="Nama..." autocomplete="off">
+            <input type="password" id="password-input" placeholder="Password...">
+            <button id="login-button">Buka Hadiah</button>
+            <p id="error-message"></p>
+        </div>
+    </div>
+
+    <div id="start-overlay" style="display: none;">
+        <div class="start-content">
+            <h1>Kotak Musik Spesial</h1>
+            <p>Klik untuk membuka hadiah Sepi.</p>
+            <button id="start-button">💕 Buka 💕</button>
+        </div>
+    </div>
+
+    <div class="music-box-container" id="music-box-container">
+        <div class="music-box">
+            <div class="box-base">
+                <div class="character" id="character">
+                    </div>
+            </div>
+            <div class="box-lid" id="lid"></div>
+        </div>
+    </div>
+
+    <div class="message-display" id="message-display">
+        <img id="message-image" src="" alt="Kenangan">
+        <h2 id="message-title"></h2>
+        <p id="message-text"></p>
+        <div class="nav-buttons">
+            <button id="prev-btn">Sebelumnya</button>
+            <button id="next-btn">Berikutnya</button>
+        </div>
+    </div>
+    
+    <div id="dedication-screen">
+        <h2>Untuk Sherly</h2>
+        <p>
+            Kotak musik ini adalah cara kakak untuk bilang, setiap momen bersama adek adalah melodi terindah dalam hidup kakak. Melalui semua kenangan yang kita lewati, adek telah membuat dunia kakak jauh lebih berwarna. Kakak janji menjadi rumah yang tenang untuk adek, setiap waktu akan selalu ada untuk adek. Bahkan apapun akan kakak usahakan semaksimal mungkin. Adek bukan sekedar pacar, adek segalanya dihidup kakak. Kita saling jaga ya, cinta, harapan, impian, hati, semuanya yang kita miliki bersama. Datanglah, jika sedang tak baik-baik saja. Kakak akan selalu disini menanti adek. Terima kasih untuk segalanya.
+        </p>
+        <p><strong>Dengan segenap cinta,<br>Dika</strong></p>
+    </div>
+
+    <audio id="background-music" loop src="music/lagu-spesial.mp3"></audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
